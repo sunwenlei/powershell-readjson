@@ -1,0 +1,118 @@
+PowerShellの演算子
+比較演算子
+PowerShell	C/C++	意味
+-eq	==	等しい
+-ne	!=	等しくない
+-gt	>	より大きい
+-ge	>=	以上
+-lt	<	より小さい
+-le	<=	以下
+-like	N/A	ワイルドカードと等しい
+-notlike	N/A	ワイルドカードと等しくない
+-match	N/A	正規表現と等しい
+-notmatch	N/A	正規表現と等しくない
+ 
+
+算術演算子
+PowerShell	C/C++	意味
++	+	加算
+-	-	減算/符号反転
+*	*	乗算
+/	/	除算
+%	%	余剰
+[Math]::Pow(x,y)	pow(x,y)	べき乗(xのy乗)
+=	=	代入
++=	+=	加算代入
+-=	-=	減算代入
+*=	*=	乗算代入
+/=	/=	除算代入
+%=	%=	剰余代入
+++	++	インクリメント
+--	--	デクリメント
+ 
+
+論理演算
+PowerShell	C/C++	意味
+-and	&&	AND
+-or	||	OR
+-not / !	!	NOT
+ 
+
+ビット演算
+PowerShell	C/C++	意味
+-band	&	AND
+-bor	|	OR
+-bnot	!	NOT
+-bxor	^	XOR
+-shl	<<	左シフト(PS3)
+-shr	>>	右シフト(PS3)
+ 
+
+型演算
+PowerShell	意味
+$a -is [型]	型と等しい
+$a -isnot [型]	型と等しくない
+$a -as [型]	型へキャスティング
+失敗時は $null
+[型]$a	型へキャスティング
+失敗時はエラー
+ 
+
+型の種類
+
+エリアス	.NET Framework
+byte	System.Byte
+int	System.Int32
+long	System.Int64
+double	System.Double
+decimal	System.Decimal
+char	System.Char
+bool	System.Boolean
+string	System.String
+array	System.Array
+xml	System.Xml.XmlDocument
+type	System.Type
+DateTime	System.DateTime
+ 
+
+特殊変数(比較的よく使うもの)
+キーワード	意味
+$_	foreachで分解された要素
+$null	NULL
+$true	True
+$false	False
+$PSVersionTable	PowerShellのバージョン
+$?	直前に実行した処理が成功したときにTrue
+$LastExitCode	直前に実行したWindowsベースプログラムのリターンコード
+(コマンドプロンプトのERRORLEVEL相当)
+$env:	環境変数取得
+$error	発生したエラー配列
+最新は$error[0]
+$input	パイプから受け取ったデーター
+変数の一覧は Get-Variable で確認できます
+特殊変数の説明は about_Automatic_Variables にありますが、ページが古いとか、見当たらないときは「about_Automatic_Variables site:microsoft.com」で検索すると良いでしょう。
+
+ 
+
+定数
+スクリプト(.ps1)を書く場合、定数を使いたくなることがあります。
+PowerShell での定数は C/C++ みたいに const 修飾ではなく、Set-Variable コマンドレットの -Option でオプションを指定します。
+
+Set-Variable -Name [変数名] -Value [値] -Option Constant
+ 
+
+例)
+Set-Variable -Name ConstData -Value "Constant Value" -Option Constant
+
+ 
+
+進数
+[Convert]::ToString($a,2)	2進文字列変換
+[Convert]::ToString($a,16)	16進文字列変換
+$a.ToString("X")	16進文字列変換
+x=小文字表示
+X=大文字表示
+x4とかで桁数指定できたりする
+[Convert]::ToInt32("2進文字列",2)	2進文字列を数値変換
+[Convert]::ToInt32("16進文字列",16)	16進文字列を数値変換
+0xnn	16進数
