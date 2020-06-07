@@ -1,0 +1,12 @@
+{
+    "targettable":[
+        "tbl1",
+        "tbl2",
+        "tbl3"
+    ],
+    "tbl1" :{
+        "col1":"col111",
+        "col2":"*DEL*"
+    }
+
+}
